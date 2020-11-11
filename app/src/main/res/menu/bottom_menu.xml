@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+
+    <item
+        android:icon="@drawable/person"
+        android:id="@+id/bottomProfile_id"
+        android:orderInCategory="100"
+        android:title="Profile"
+        app:showAsAction="always" />
+
+  <item
+        android:icon="@drawable/result"
+        android:id="@+id/bottomResult_id"
+        android:orderInCategory="100"
+        android:title="Result"
+        app:showAsAction="always" />
+
+
+
+    <item
+        android:icon="@drawable/home"
+        android:id="@+id/bottomHome_id"
+        android:orderInCategory="100"
+        android:title="Home"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/bottom_TopPlayer_id"
+        android:icon="@drawable/top_gamer"
+        android:orderInCategory="100"
+        android:title="Top player"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/bottom_balance_wallet_id"
+        android:icon="@drawable/balance_wallet"
+        android:title="Deposit"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+
+
+</menu>

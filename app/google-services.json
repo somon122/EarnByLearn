@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "401093795143",
+    "firebase_url": "https://ptademo-c6ef2.firebaseio.com",
+    "project_id": "ptademo-c6ef2",
+    "storage_bucket": "ptademo-c6ef2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401093795143:android:d0354a297cc4607a304062",
+        "android_client_info": {
+          "package_name": "com.example.pta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401093795143-5bdud0hhf7npc36kcke3cia4bur32fra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-OITFJxAlDaSilDNF5t6CNn3SJbDEq5c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401093795143-5bdud0hhf7npc36kcke3cia4bur32fra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
