@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     BottomNavigationView bottomNavigationView;
-
     SaveUserInfo saveUserInfo;
 
     @Override
@@ -81,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                         fragmentSet(ProfileFragment);
                         return true;
 
-
                     case R.id.bottomResult_id:
                         ResultFragment resultFragment = new ResultFragment();
                         fragmentSet(resultFragment);
@@ -91,14 +89,14 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this, WalletActivity.class));
                         return true;
 
-                    case R.id.bottom_TopPlayer_id:
+                  /*  case R.id.bottom_TopPlayer_id:
 
                         startActivity(new Intent(MainActivity.this, ExamActivity.class));
 
-                      /*  TopPlayerListFragment topPlayerListFragment = new TopPlayerListFragment();
-                        fragmentSet(topPlayerListFragment);*/
+                      *//*  TopPlayerListFragment topPlayerListFragment = new TopPlayerListFragment();
+                        fragmentSet(topPlayerListFragment);*//*
                         return true;
-
+*/
                     default:
                         return false;
                 }

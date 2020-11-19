@@ -5,7 +5,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,21 +28,30 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pta.MainActivity;
 import com.example.pta.R;
+import com.example.pta.SaveUserInfo;
+import com.example.pta.match.JoinInMatchActivity;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import es.dmoral.toasty.Toasty;
+
 public class ExamActivity extends AppCompatActivity {
+
+    private String currentDateAndTime;
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -61,16 +73,19 @@ public class ExamActivity extends AppCompatActivity {
     private Button subjectiveP_NextBtn;
     private String answer;
 
-    private long START_TIME_IN_MILLIS = 500000;
+    private long START_TIME_IN_MILLIS = 0;
     private TextView mTextViewCountDown;
     private Button mButtonStartPause;
     private Button mButtonReset;
     private CountDownTimer mCountDownTimer;
     private boolean mTimerRunning;
-    private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    //private long mTimeLeftInMillis = START_TIME_IN_MILLIS;
+    private long mTimeLeftInMillis ;
     int tTest=0;
     AlertDialog dialog;
-
+    ProgressBar progressBar;
+    SaveUserInfo saveUserInfo;
+    String matchName, matchId,category,total_time,start_date_time, end_date_time,type;
 
 
     @Override
@@ -82,8 +97,28 @@ public class ExamActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle("Live Exam");
+
+
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null){
+            matchName = bundle.getString("name");
+            matchId = bundle.getString("matchId");
+            category = bundle.getString("category");
+            start_date_time = bundle.getString("start_date_time");
+            end_date_time = bundle.getString("end_date_time");
+            total_time = bundle.getString("total_time");
+            type = bundle.getString("type");
+            setTitle("Live "+type);
+            examQList(type,matchId);
+            long time = Long.parseLong(total_time);
+            START_TIME_IN_MILLIS = time*60000;
+
+        }
+
+
+
         liveExamList = new ArrayList<>();
+        saveUserInfo = new SaveUserInfo(this);
         radioGroup = findViewById(R.id.liveExamOptionGroup);
         optionButtonNo1 = findViewById(R.id.subjectOptionNo1_id);
         optionButtonNo2 = findViewById(R.id.subjectOptionNo2_id);
@@ -91,42 +126,27 @@ public class ExamActivity extends AppCompatActivity {
         optionButtonNo4 = findViewById(R.id.subjectOptionNo4_id);
         questionTV = findViewById(R.id.subjectQuestion_id);
         numberTV = findViewById(R.id.subjectNumber_id);
-
+        progressBar = findViewById(R.id.examProgressBar);
         questionCountTV = findViewById(R.id.examQuestionCount);
         timeShowTV = findViewById(R.id.examTimeShow);
         subjectiveP_NextBtn = findViewById(R.id.subjectiveP_NextBtn);
-        examQList("2020-08-30","DailyTest","General_Knowledge");
 
         subjectiveP_NextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 if (radioGroup.getCheckedRadioButtonId() == -1){
-
                     Toast.makeText(ExamActivity.this, "Please select option", Toast.LENGTH_SHORT).show();
                 }else {
                     int radioId = radioGroup.getCheckedRadioButtonId();
                     radioButton = findViewById(radioId);
                     String selectOption = radioButton.getText().toString();
-
                     if (selectOption.equals(answer)){
-
                         nextQuestion();
-                        
                     }else {
-                        START_TIME_IN_MILLIS = mTimeLeftInMillis-10000;
+                        START_TIME_IN_MILLIS = mTimeLeftInMillis-20000;
                         pauseTimer();
                         nextQuestion();
                     }
-
-              /*  if (tTest==0){
-                    startTimer();
-                    tTest++;
-                }else {
-                   START_TIME_IN_MILLIS = mTimeLeftInMillis-10000;
-                  pauseTimer();
-                }*/
 
                 }
             }
@@ -143,23 +163,15 @@ public class ExamActivity extends AppCompatActivity {
         }else {
             popUp();
         }
-
     }
 
     private void unCheckOption() {
         radioGroup.clearCheck();
-
-        /*optionButtonNo1.setChecked(false);
-        optionButtonNo2.setChecked(false);
-        optionButtonNo3.setChecked(false);
-        optionButtonNo4.setChecked(false);*/
-
     }
-
     private void startExamAlert() {
         AlertDialog.Builder builder = new AlertDialog.Builder(ExamActivity.this);
+        builder.setCancelable(false);
         View view = LayoutInflater.from(ExamActivity.this).inflate(R.layout.ads_click_model,null);
-
         Button clickBtn = view.findViewById(R.id.modelClimAdsNow);
         clickBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,11 +183,12 @@ public class ExamActivity extends AppCompatActivity {
         builder.setView(view);
         dialog = builder.create();
         dialog.show();
-
     }
 
 
     private void startTimer() {
+
+        mTimeLeftInMillis = START_TIME_IN_MILLIS;
         mCountDownTimer = new CountDownTimer(mTimeLeftInMillis, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -250,29 +263,26 @@ public class ExamActivity extends AppCompatActivity {
                 R.style.BottomSheetDialogTheme);
         View bottomSheetView = LayoutInflater.from(ExamActivity.this).inflate(R.layout.category_popup_model,
                 (LinearLayout)findViewById(R.id.pendingAlertPopUp_id));
-        TextView userName = bottomSheetView.findViewById(R.id.payAlertUserName);
-        TextView number = bottomSheetView.findViewById(R.id.payAlertNumber);
-        TextView referCode = bottomSheetView.findViewById(R.id.payAlertReferCode);
+        bottomSheetDialog.setCancelable(false);
         Button payNow = bottomSheetView.findViewById(R.id.payAlertPayNowBtn);
-        Button payLater = bottomSheetView.findViewById(R.id.payAlertPayLaterBtn);
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+        currentDateAndTime = sdf.format(new Date());
 
         payNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                submitResult(matchId,saveUserInfo.getNumber(),saveUserInfo.getUserName(), String.valueOf(mTimeLeftInMillis),
+                        "0", start_date_time);
 
             }
         });
-        payLater.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bottomSheetDialog.dismiss();
-            }
-        });
+
         bottomSheetDialog.setContentView(bottomSheetView);
         bottomSheetDialog.show();
 
     }
-
 
     private void updateData(int qCount) {
 
@@ -300,22 +310,18 @@ public class ExamActivity extends AppCompatActivity {
         }
     }
 
-    private void examQList(final String date_time, final String category , final String subject) {
+    private void examQList(final String type , final String matchId) {
 
-        String url = /*getString(R.string.BASS_URL)*/ "https://apronseekers.xyz/api/"+ "liveExam";
+        String url = getString(R.string.BASS_URL)+"getLiveExamQ";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 try {
                     JSONObject obj = new JSONObject(response);
-
                     if (obj.getBoolean("success")) {
-
                         String res = obj.getString("list");
                         JSONArray jsonArray = new JSONArray(res);
-                        //progressBar.setVisibility(View.GONE);
-
+                        progressBar.setVisibility(View.GONE);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject dataobj = jsonArray.getJSONObject(i);
                             LiveExamClass liveExamClass = new LiveExamClass();
@@ -326,7 +332,6 @@ public class ExamActivity extends AppCompatActivity {
                             liveExamClass.setOption3(dataobj.getString("option3"));
                             liveExamClass.setOption4(dataobj.getString("option4"));
                             liveExamClass.setAnswer(dataobj.getString("answer"));
-                            liveExamClass.setDateTime(dataobj.getString("date_time"));
                             liveExamList.add(liveExamClass);
                         }
                         mQuestionsLength = liveExamList.size();
@@ -351,15 +356,68 @@ public class ExamActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> Params = new HashMap<>();
-                Params.put("date_time", date_time);
-                Params.put("examCategory", category);
-                Params.put("subject", subject);
+                Params.put("matchId", matchId);
+                Params.put("exam_type", type);
                 return Params;
             }
         };
         RequestQueue queue = Volley.newRequestQueue(ExamActivity.this);
         queue.add(stringRequest);
     }
+
+    public void submitResult (final String matchId,final String number, final String playerName
+            , final String time , final String prizeMoney , final String date_time) {
+
+        String url = getString(R.string.BASS_URL) + "insertResultSummary";
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try {
+                    JSONObject obj = new JSONObject(response);
+                    if (obj.getBoolean("success")) {
+                        Toasty.success(ExamActivity.this, "Submit is successfully", Toast.LENGTH_SHORT, true).show();
+                        startActivity(new Intent(ExamActivity.this, MainActivity.class));
+                        finish();
+                    } else {
+
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(ExamActivity.this, "Sorry Net Problem.", Toast.LENGTH_SHORT).show();
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(ExamActivity.this, "Sorry Net Problem.", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(ExamActivity.this, "Sorry Net Problem.", Toast.LENGTH_SHORT).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String, String> Params = new HashMap<>();
+                Params.put("matchId", matchId);
+                Params.put("number", number);
+                Params.put("name", playerName);
+                Params.put("time", time);
+                Params.put("prizeMoney", prizeMoney);
+                Params.put("date_time", date_time);
+                return Params;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(ExamActivity.this);
+        queue.add(stringRequest);
+    }
+
+
 
     private void noDataAlert() {
 

@@ -10,16 +10,17 @@
     <application
         android:name=".AppNotify"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_bgbd"
+        android:icon="@drawable/main_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_bgbd"
+        android:roundIcon="@drawable/main_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".liveExam.ExamActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity android:name=".RulesActivity"></activity>
+        <activity
+            android:name=".liveExam.ExamActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".match.MatchDetailsActivity"
             android:screenOrientation="portrait" />

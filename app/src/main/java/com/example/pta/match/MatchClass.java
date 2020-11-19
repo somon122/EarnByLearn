@@ -2,24 +2,23 @@ package com.example.pta.match;
 
 public class MatchClass {
 
-    private String id, name, category,candidateNo,date_time, total_time, entryFee,
-            type, Syllabus,Routine,winnerPrice;
+    private String id, name, category,candidateNo,start_date_time,end_date_time, total_time, entryFee,
+            type, Syllabus,winnerPrice;
 
     public MatchClass() {}
 
-    public MatchClass(String id, String name, String category, String candidateNo,
-                      String date_time, String total_time, String entryFee,
-                      String type, String syllabus, String routine, String winnerPrice) {
+    public MatchClass(String id, String name, String category, String candidateNo, String start_date_time,
+                      String end_date_time, String total_time, String entryFee, String type, String syllabus, String winnerPrice) {
         this.id = id;
         this.name = name;
         this.category = category;
         this.candidateNo = candidateNo;
-        this.date_time = date_time;
+        this.start_date_time = start_date_time;
+        this.end_date_time = end_date_time;
         this.total_time = total_time;
         this.entryFee = entryFee;
         this.type = type;
         Syllabus = syllabus;
-        Routine = routine;
         this.winnerPrice = winnerPrice;
     }
 
@@ -39,8 +38,12 @@ public class MatchClass {
         return candidateNo;
     }
 
-    public String getDate_time() {
-        return date_time;
+    public String getStart_date_time() {
+        return start_date_time;
+    }
+
+    public String getEnd_date_time() {
+        return end_date_time;
     }
 
     public String getTotal_time() {
@@ -57,10 +60,6 @@ public class MatchClass {
 
     public String getSyllabus() {
         return Syllabus;
-    }
-
-    public String getRoutine() {
-        return Routine;
     }
 
     public String getWinnerPrice() {

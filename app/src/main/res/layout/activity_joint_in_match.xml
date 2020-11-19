@@ -101,24 +101,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/participatedSubmitPlayerName1"
+            <TextView
+                android:padding="10dp"
+                android:text="Join Now"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:hint="Exact game Name"
-                app:counterMaxLength="10"
-                app:endIconMode="clear_text"
-                app:hintTextColor="@color/Gray"
-               >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:textColor="@color/white"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

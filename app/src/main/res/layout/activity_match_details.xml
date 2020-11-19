@@ -33,8 +33,6 @@
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -71,9 +69,7 @@
                 android:id="@+id/cardView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,9 +172,7 @@
                 android:id="@+id/cardView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
                 app:cardCornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -213,6 +207,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
+                            android:visibility="gone"
                             android:lines="1"
                             android:text="ROUTINE"
                             android:textSize="17sp"
@@ -252,24 +247,25 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/matchDetailsVersion"
+                            android:id="@+id/matchDetailsRoutine"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
                             android:lines="1"
+                            android:visibility="gone"
                             android:text="routine"
                             android:textColor="@color/DarkBlue"
                             android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/matchDetailsMap"
+                        <Button
+                            android:id="@+id/matchDetailsSyllabus"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
                             android:lines="1"
-                            android:text="syllabus"
+                            android:text="Open"
                             android:textColor="@color/DarkBlue"
                             android:textStyle="bold" />
 
@@ -291,92 +287,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView3">
 
-
                 <TextView
+                    android:text="App rules detail"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <com.codesgood.views.JustifiedTextView
                     android:id="@+id/instruction1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="@string/text1"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/instruction2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/text2"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/instruction3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/text3"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/instruction4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/text4"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/instruction5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/text5"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/instruction6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/text6"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/instruction7"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/text7"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="italic" />
-
-                <TextView
-                    android:id="@+id/instruction8"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/text8"
-                    android:textColor="@color/white"
-                    android:textSize="17sp"
-                    android:textStyle="italic" />
+                    android:padding="10dp"
+                    android:textColor="@color/AliceBlue"
+                    android:textSize="17sp" />
 
                 <Button
                     android:id="@+id/participatedListShowBtn"
                     android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:drawablePadding="5dp"
+                    android:visibility="gone"
                     android:layout_marginTop="20dp"
                     android:layout_gravity="center"
                     android:drawableLeft="@drawable/load"
@@ -386,6 +319,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/participatedRecyclerView"
                     android:padding="3dp"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 

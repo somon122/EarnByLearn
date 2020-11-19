@@ -28,6 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.pta.ProfileSetUpActivity;
 import com.example.pta.R;
+import com.example.pta.RulesActivity;
 import com.example.pta.SaveUserInfo;
 import com.example.pta.SignInActivity;
 import com.example.pta.SplashScreenActivity;
@@ -49,7 +50,7 @@ import java.util.Map;
 public class ProfileFragment extends Fragment {
 
     CardView logout,profileWallet,updateProfile, share,howToPlay,aboutUs;
-    TextView userNameTV, userNumberTV, totalWinTV, balanceTV, totalPlayedMatch;
+    TextView userNameTV, userNumberTV, balanceTV;
     ImageView userImage;
     SaveUserInfo saveUserInfo;
     int jointC;
@@ -68,9 +69,6 @@ public class ProfileFragment extends Fragment {
         userNumberTV = root.findViewById(R.id.profileShowNumber);
         balanceTV = root.findViewById(R.id.profileShowBalance);
 
-        totalPlayedMatch = root.findViewById(R.id.profileTotalPlayedMatch);
-
-        totalWinTV = root.findViewById(R.id.profileShowTotalWin);
         userImage = root.findViewById(R.id.profileUserImage);
         updateProfile = root.findViewById(R.id.profileUpdate);
         share = root.findViewById(R.id.profileShare);
@@ -119,13 +117,15 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                try {
+                startActivity(new Intent(getContext(), RulesActivity.class));
+
+              /*  try {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com")));
                 } catch (ActivityNotFoundException e) {
 
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com")));
 
-                }
+                }*/
 
             }
         });
@@ -206,9 +206,8 @@ public class ProfileFragment extends Fragment {
                             String totalBalance = dataobj.getString("totalBalance");
                             userNameTV.setText(userName);
                             userNumberTV.setText("+"+number);
-                            totalWinTV.setText(totalWin);
                             balanceTV.setText(totalBalance+"TK");
-                            getTotalJoint(number);
+                            //getTotalJoint(number);
 
                         }
 
@@ -249,7 +248,6 @@ public class ProfileFragment extends Fragment {
                     if (obj.getBoolean("success")) {
                         String res = obj.getString("list");
                         JSONArray jsonArray = new JSONArray(res);
-                        totalPlayedMatch.setText(""+jsonArray.length());
 
                     } else {
 

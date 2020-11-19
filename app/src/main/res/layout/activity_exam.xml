@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -33,49 +32,50 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView11"
-        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="3dp"
         android:padding="2dp"
         app:cardCornerRadius="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subjectPracticeShowToolBar">
+
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:padding="10dp">
 
             <TextView
                 android:id="@+id/examQuestionCount"
-                android:textSize="20sp"
-                android:text="0/00"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_margin="10dp"
+                android:text="0/00"
                 android:textColor="@color/black"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:textSize="20sp" />
 
 
             <TextView
                 android:id="@+id/examTimeShow"
-                android:textSize="20sp"
-                android:text="Time left: 00"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:padding="5dp"
-                android:layout_margin="10dp"
+                android:text="Time left: 00"
                 android:textColor="@color/black"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:textSize="20sp" />
 
 
         </LinearLayout>
@@ -85,8 +85,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginStart="3dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="3dp"
         android:padding="2dp"
         app:cardCornerRadius="5dp"
@@ -96,9 +96,9 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
 
             <LinearLayout
                 android:id="@+id/linearLayout"
@@ -116,24 +116,24 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="15sp"
-                    android:textStyle="italic|bold"
                     android:gravity="end"
                     android:padding="2dp"
                     android:text="1) "
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="italic|bold" />
 
                 <TextView
                     android:id="@+id/subjectQuestion_id"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="9"
-                    android:textSize="15sp"
-                    android:textStyle="italic|bold"
                     android:paddingTop="3dp"
                     android:paddingBottom="3dp"
                     android:text="What is your name?"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="italic|bold" />
 
 
             </LinearLayout>
@@ -159,78 +159,86 @@
                     app:layout_constraintTop_toBottomOf="@+id/question_id">
 
 
+                    <RadioButton
+                        android:id="@+id/subjectOptionNo1_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="10dp"
+                        android:hint="Data is empty"
+                        android:textColor="#000"
+                        tools:ignore="RtlSymmetry" />
 
-                <RadioButton
-                    android:id="@+id/subjectOptionNo1_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:hint="Data is empty"
-                    android:textColor="#000"
-                    tools:ignore="RtlSymmetry" />
+                    <RadioButton
+                        android:id="@+id/subjectOptionNo2_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="10dp"
+                        android:hint="Data is empty"
+                        android:textColor="#000"
+                        tools:ignore="RtlSymmetry" />
 
-                <RadioButton
-                    android:id="@+id/subjectOptionNo2_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:hint="Data is empty"
-                    android:textColor="#000"
-                    tools:ignore="RtlSymmetry" />
+                    <RadioButton
+                        android:id="@+id/subjectOptionNo3_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="10dp"
+                        android:hint="Data is empty"
+                        android:textColor="#000"
+                        tools:ignore="RtlSymmetry" />
 
-                <RadioButton
-                    android:id="@+id/subjectOptionNo3_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:hint="Data is empty"
-                    android:textColor="#000"
-                    tools:ignore="RtlSymmetry" />
-
-                <RadioButton
-                    android:id="@+id/subjectOptionNo4_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="10dp"
-                    android:hint="Data is empty"
-                    android:textColor="#000"
-                    tools:ignore="RtlSymmetry" />
+                    <RadioButton
+                        android:id="@+id/subjectOptionNo4_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="10dp"
+                        android:hint="Data is empty"
+                        android:textColor="#000"
+                        tools:ignore="RtlSymmetry" />
 
                 </RadioGroup>
 
             </LinearLayout>
 
-
-            <Button
-                android:id="@+id/subjectiveP_NextBtn"
-                android:text="Next"
-                android:textSize="17sp"
-                android:layout_marginTop="30dp"
-                android:background="@color/colorPrimary"
-                android:theme="@style/AppTheme.AppBarOverlay"
-                android:layout_width="200dp"
+            <ProgressBar
+                android:id="@+id/examProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
 
 
+            <Button
+                android:id="@+id/subjectiveP_NextBtn"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimary"
+                android:text="Next"
+                android:textSize="17sp"
+                android:theme="@style/AppTheme.AppBarOverlay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/examProgressBar" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     </androidx.cardview.widget.CardView>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

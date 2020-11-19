@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -32,11 +33,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:src="@drawable/propic" />
+                    android:src="@drawable/profile_image" />
 
                 <TextView
                     android:id="@+id/profileUserName"
@@ -117,93 +116,6 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="125dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorAccent"
-                    app:cardElevation="10dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="3dp">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/played" />
-
-                        <TextView
-                            android:id="@+id/profileTotalPlayedMatch"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:fontFamily="@font/baloo"
-                            android:includeFontPadding="false"
-                            android:text="00"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/Played1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/profileTotalPlayedMatch"
-                            android:layout_centerHorizontal="true"
-                            android:includeFontPadding="false"
-                            android:text="Played"
-                            android:textSize="20sp" />
-
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="0dp"
-                    android:layout_height="125dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@color/colorAccent"
-                    app:cardElevation="3dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="3dp">
-
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_centerHorizontal="true"
-                            android:src="@drawable/t1" />
-
-                        <TextView
-                            android:id="@+id/profileShowTotalWin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:fontFamily="@font/baloo"
-                            android:includeFontPadding="false"
-                            android:text="00"
-                            android:textSize="20sp" />
-
-                        <TextView
-                            android:id="@+id/win1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/profileShowTotalWin"
-                            android:layout_centerHorizontal="true"
-                            android:includeFontPadding="false"
-                            android:text="Total win"
-                            android:textSize="17sp" />
-
-
-                    </RelativeLayout>
-
-                </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 

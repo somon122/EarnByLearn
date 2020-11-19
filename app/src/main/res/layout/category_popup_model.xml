@@ -15,8 +15,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
-            android:src="@drawable/about"
+        <com.airbnb.lottie.LottieAnimationView
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/time"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:layout_width="100dp"
@@ -26,73 +28,37 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
-            android:padding="10dp"
-            android:text="Add fee Status"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:padding="5dp"
+            android:text="Congratulation!"
+            android:textColor="@color/Green"
+            android:textSize="25sp" />
 
 
-        <TextView
-            android:id="@+id/payAlertUserName"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="Your name: "
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-        <TextView
-            android:id="@+id/payAlertNumber"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="Your name: "
-            android:textColor="@color/black"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/payAlertReferCode"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="referCode: "
-            android:textColor="@color/black"
-            android:textSize="17sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="payAlertText"
+            android:gravity="center"
+            android:text="Hurry boss!\n\nQuick submit as soon as possible for win this Contest.\n\nGood luck!"
             android:textColor="@color/black"
-            android:textSize="15sp" />
+            android:textSize="17sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_marginBottom="20dp"
             android:orientation="horizontal">
 
             <Button
                 android:layout_margin="10dp"
                 android:id="@+id/payAlertPayNowBtn"
                 android:layout_width="0dp"
-                android:textColor="@color/black"
+                android:background="@color/black"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Earn now" />
+                android:text="Submit now" />
 
-
-            <Button
-                android:textColor="@color/black"
-                android:layout_margin="10dp"
-                android:id="@+id/payAlertPayLaterBtn"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Earn later" />
 
         </LinearLayout>
     </LinearLayout>

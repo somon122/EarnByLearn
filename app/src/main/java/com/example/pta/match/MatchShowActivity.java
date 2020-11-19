@@ -27,7 +27,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,8 +46,9 @@ public class MatchShowActivity extends AppCompatActivity {
     }
 
 
-    RecyclerView recyclerView;
-    List<MatchClass> matchClassList;
+    private RecyclerView recyclerView;
+    private List<MatchClass> matchClassList;
+    private long currentMilliseconds;
 
 
     @Override
@@ -62,16 +66,28 @@ public class MatchShowActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.hasFixedSize();
         matchClassList = new ArrayList<>();
+
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String withdraw_date = sdf1.format(new Date());
+        try {
+            Date mDate = sdf1.parse(withdraw_date);
+            currentMilliseconds = mDate.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+
         Bundle bundle =getIntent().getExtras();
         if (bundle != null){
-            String category = bundle.getString("category");
-            setTitle(category);
-            getMatchData(category);
+            String type = bundle.getString("type");
+            setTitle(type);
+            getMatchData(type);
         }
 
     }
 
-    public void getMatchData(final String category) {
+    public void getMatchData(final String type) {
         String url = getString(R.string.BASS_URL) + "getMatch";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @SuppressLint("SetTextI18n")
@@ -90,25 +106,22 @@ public class MatchShowActivity extends AppCompatActivity {
                             String matchName = dataobj.getString("name");
                             String category = dataobj.getString("category");
                             String candidateNo = dataobj.getString("candidateNo");
-                            String date_time = dataobj.getString("date_time");
+                            String start_date_time = dataobj.getString("start_date_time");
+                            String end_date_time = dataobj.getString("end_date_time");
                             String total_time = dataobj.getString("total_time");
                             String entryFee = dataobj.getString("enteryFee");
                             String type = dataobj.getString("type");
                             String syllabus = dataobj.getString("syllabus");
-                            String routine = dataobj.getString("routine");
                             String winnerPrice = dataobj.getString("winnerPrize");
 
-
-                            MatchClass matchClass = new MatchClass(rId,matchName,category,candidateNo,date_time,
-                                    total_time,entryFee,type,routine,syllabus,winnerPrice);
+                            MatchClass matchClass = new MatchClass(rId,matchName,category,candidateNo,start_date_time,end_date_time,
+                                    total_time,entryFee,type,syllabus,winnerPrice);
                             matchClassList.add(matchClass);
                         }
 
-                        MatchAdapter matchAdapter = new MatchAdapter(MatchShowActivity.this,matchClassList);
+                        MatchAdapter matchAdapter = new MatchAdapter(MatchShowActivity.this,matchClassList,currentMilliseconds);
                         recyclerView.setAdapter(matchAdapter);
                         matchAdapter.notifyDataSetChanged();
-
-                    } else {
 
                     }
                 } catch (JSONException e) {
@@ -119,8 +132,6 @@ public class MatchShowActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
-
             }
 
         }) {
@@ -128,14 +139,11 @@ public class MatchShowActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
 
                 Map<String, String> Params = new HashMap<>();
-                Params.put("category", category);
+                Params.put("type", type);
                 return Params;
             }
         };
         RequestQueue queue = Volley.newRequestQueue(Objects.requireNonNull(MatchShowActivity.this));
         queue.add(stringRequest);
     }
-
-
-
 }

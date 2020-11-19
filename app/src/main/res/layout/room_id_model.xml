@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/roomIdMatchName"
@@ -17,97 +17,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <LinearLayout
-        android:orientation="horizontal"
+
+    <Button
+        android:id="@+id/modelEnterExam"
+        android:layout_margin="30dp"
+        android:text="Enter Exam"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:textColor="@color/white"
-                android:text="Room ID: "
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
-
-
-            <TextView
-                android:id="@+id/roomModelCodeId"
-                android:textColor="@color/white"
-                android:textSize="17sp"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-
-
-        <Button
-            android:id="@+id/codeIdCopyBtn"
-            android:text="Copy"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"/>
-
-
-    </LinearLayout>
-
-
-      <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-          <LinearLayout
-              android:orientation="horizontal"
-              android:layout_gravity="center"
-              android:layout_width="0dp"
-              android:layout_weight="3"
-              android:layout_height="wrap_content">
-
-              <TextView
-                  android:textColor="@color/white"
-              android:text="Password: "
-                  android:gravity="center"
-              android:layout_width="0dp"
-                  android:layout_weight="1"
-              android:layout_height="wrap_content"/>
-
-
-              <TextView
-                  android:id="@+id/roomModelPassword"
-                  android:textColor="@color/white"
-                  android:textSize="17sp"
-                  android:layout_gravity="center"
-                  android:gravity="center"
-                  android:layout_width="0dp"
-                  android:layout_weight="1"
-                  android:layout_height="wrap_content"/>
-
-          </LinearLayout>
-
-          <Button
-              android:id="@+id/passwordCopyBtn"
-              android:text="Copy"
-              android:layout_gravity="center"
-              android:gravity="center"
-              android:layout_width="0dp"
-              android:layout_weight="1"
-              android:layout_height="wrap_content"/>
-
-
-    </LinearLayout>
-
-
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

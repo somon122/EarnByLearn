@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,19 +52,16 @@ public class JoinInMatchActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    String matchId,category,date_time,entryFee,matchName, spotsLeft, jointStatus, type;
+    String matchId,category,start_date_time,end_date_time,entryFee,matchName, spotsLeft, jointStatus, type;
     int balance;
     int cost = 0;
-    TextInputLayout player;
-    LinearLayout joinPlayerInputBox;
     TextView matchNameTV, entryFeeTV,balanceTV,spotsLeftTV, balanceStatus;
     SaveUserInfo saveUserInfo;
 
     ProgressBar progressBar;
     Button userJoinSubmitBtn;
     String userNumber;
-
-    String p1;
+    String currentDateAndTime;
 
 
     @Override
@@ -73,9 +73,6 @@ public class JoinInMatchActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        player = findViewById(R.id.participatedSubmitPlayerName1);
-        joinPlayerInputBox = findViewById(R.id.joinPlayerInputBox);
 
         saveUserInfo = new SaveUserInfo(this);
         userNumber = saveUserInfo.getNumber();
@@ -89,29 +86,32 @@ public class JoinInMatchActivity extends AppCompatActivity {
         balanceStatus = findViewById(R.id.balanceStatus);
         spotsLeftTV = findViewById(R.id.joinMatchSportLeft);
 
+        @SuppressLint("SimpleDateFormat")
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss");
+        currentDateAndTime = sdf.format(new Date());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null){
-
             matchId = bundle.getString("matchId");
             matchName = bundle.getString("matchName");
             type = bundle.getString("type");
             spotsLeft = bundle.getString("spotsLeft");
             entryFee = bundle.getString("entryFee");
             category = bundle.getString("category");
-            date_time = bundle.getString("date_time");
+            start_date_time = bundle.getString("start_date_time");
+            end_date_time = bundle.getString("end_date_time");
             entryFeeTV.setText("Entry fee: "+entryFee+"TK");
             matchNameTV.setText(matchName);
             getUserBalanceData(saveUserInfo.getNumber());
-
+            cost = Integer.parseInt(entryFee);
         }
     }
 
 
     public void joinSubmit(View view) {
-
         confirmAlert();
     }
+
 
     private void confirmAlert() {
 
@@ -128,8 +128,6 @@ public class JoinInMatchActivity extends AppCompatActivity {
                         }else {
                             Toast.makeText(JoinInMatchActivity.this, "Try Again", Toast.LENGTH_SHORT).show();
                         }
-
-
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
@@ -137,38 +135,28 @@ public class JoinInMatchActivity extends AppCompatActivity {
                 dialogInterface.dismiss();
             }
         });
-
         AlertDialog dialog = builder.create();
         dialog.show();
-
     }
 
     private void join() {
 
-         p1 = player.getEditText().getText().toString();
-
-         if (p1.isEmpty()){
-             player.getEditText().setError("Please enter Name");
-         }else {
              if (balance >= cost){
                  int lastBalance = balance-cost;
                  if (cost <=0){
                      progressBar.setVisibility(View.VISIBLE);
                      userJoinSubmitBtn.setEnabled(false);
-                     submitJoinData( userNumber,p1);
+                     submitJoinData( userNumber);
                  }else {
                      progressBar.setVisibility(View.VISIBLE);
                      userJoinSubmitBtn.setEnabled(false);
-                     joinFee( String.valueOf(lastBalance), userNumber,p1);
+                     joinFee( String.valueOf(lastBalance), userNumber);
                  }
 
              }else {
                  Toast.makeText(this, "You have not enough Balance", Toast.LENGTH_SHORT).show();
              }
          }
-
-        }
-
 
 
     public void getUserBalanceData(final String number) {
@@ -218,7 +206,7 @@ public class JoinInMatchActivity extends AppCompatActivity {
     }
 
 
-    public void joinFee (final String lastBalance,final String number, final String playerName) {
+    public void joinFee (final String lastBalance,final String number) {
         String url = getString(R.string.BASS_URL) + "joinFee";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -228,7 +216,7 @@ public class JoinInMatchActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response);
                     if (obj.getBoolean("success")) {
 
-                        submitJoinData(number,playerName);
+                        submitJoinData(number);
 
                     } else {
                         progressBar.setVisibility(View.GONE);
@@ -261,7 +249,7 @@ public class JoinInMatchActivity extends AppCompatActivity {
     }
 
 
-    public void submitJoinData (final String number, final String playerName) {
+    public void submitJoinData (final String number) {
         String url = getString(R.string.BASS_URL) + "joinUser";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -300,9 +288,9 @@ public class JoinInMatchActivity extends AppCompatActivity {
                 Map<String, String> Params = new HashMap<>();
                 Params.put("matchId", matchId);
                 Params.put("userId", saveUserInfo.getId());
-                Params.put("playerName", playerName);
+                Params.put("playerName", saveUserInfo.getUserName());
                 Params.put("number", number);
-                Params.put("date_time", date_time);
+                Params.put("date_time", currentDateAndTime);
                 return Params;
             }
         };

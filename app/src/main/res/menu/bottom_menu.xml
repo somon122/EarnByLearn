@@ -28,12 +28,12 @@
         android:title="Home"
         app:showAsAction="always" />
 
-    <item
+   <!-- <item
         android:id="@+id/bottom_TopPlayer_id"
         android:icon="@drawable/top_gamer"
         android:orderInCategory="100"
         android:title="Top player"
-        app:showAsAction="always" />
+        app:showAsAction="always" />-->
 
     <item
         android:id="@+id/bottom_balance_wallet_id"

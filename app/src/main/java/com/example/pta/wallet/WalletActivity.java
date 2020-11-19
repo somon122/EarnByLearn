@@ -43,7 +43,7 @@ public class WalletActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     SaveUserInfo saveUserInfo;
-    TextView balance,depositBalance;
+    TextView balance,depositBalance, mainBalance;
     UserWalletInfo userWalletInfo;
 
     @Override
@@ -61,6 +61,7 @@ public class WalletActivity extends AppCompatActivity {
         userWalletInfo = new UserWalletInfo(this);
         balance = findViewById(R.id.walletWinAmount);
         depositBalance = findViewById(R.id.walletDepositAmount);
+        mainBalance = findViewById(R.id.walletMainBalance);
         saveUserInfo = new SaveUserInfo(this);
         getUserProfileData(saveUserInfo.getNumber());
 
@@ -115,6 +116,7 @@ public class WalletActivity extends AppCompatActivity {
                             String totalBalance = dataobj.getString("totalBalance");
                             balance.setText(winAmount+"TK");
                             depositBalance.setText(depositAmount+"TK");
+                            mainBalance.setText(totalBalance+"TK");
                             userWalletInfo.setBalance(winAmount);
                             userWalletInfo.setTotalBalance(totalBalance);
 
